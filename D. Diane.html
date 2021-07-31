@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/styles/default.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/markdown-it-texmath/css/texmath.min.css">
+<link rel="stylesheet" href="file:///c:\Users\User\.vscode\extensions\goessner.mdmath-2.7.4\themes\default\style.css">
+
+</head>
+<body class="markdown-body">
+<h1 id="d-diane"><a href="https://codeforces.com/contest/1554/problem/D"><strong>D. Diane</strong></a></h1>
+<h2 id="a-resumen-del-problema"><strong>A. RESUMEN DEL PROBLEMA</strong></h2>
+<p>Dado un entero <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span>, encontrar un string <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi></mrow><annotation encoding="application/x-tex">s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">s</span></span></span></span> de longitud <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span> de letras minúsculas tal que todas las subcadenas del string <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi></mrow><annotation encoding="application/x-tex">s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">s</span></span></span></span> ocurren en <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi></mrow><annotation encoding="application/x-tex">s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">s</span></span></span></span> un número impar de veces.
+El problema pide imprimir <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi></mrow><annotation encoding="application/x-tex">s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">s</span></span></span></span>.</p>
+<hr>
+<h2 id="b-ideas-que-resuelven-el-problema"><strong>B. IDEAS QUE RESUELVEN EL PROBLEMA</strong></h2>
+<p>Haciendo casos
+Buscando estructuras
+buscar patrones</p>
+<hr>
+<h2 id="c-errores-que-comet%C3%AD"><strong>C. ERRORES QUE COMETÍ</strong></h2>
+<p>no he entrenado en los ultimos meses
+no se me ocurrio nada</p>
+<hr>
+<h2 id="d-c%C3%B3digo"><strong>D. CÓDIGO</strong></h2>
+<blockquote>
+<p>[name=Virginia Norma Puente Jara]Que ha pasao</p>
+</blockquote>
+<ul>
+<li>Code block with color and line numbers：</li>
+</ul>
+<pre><code class="code-line language-cpp="><code><div>#include&lt;bits/stdc++.h&gt;
+using namespace std;
+#define fastio ios_base::sync_with_stdio(0);cin.tie(0)
+#define f(i,m,n) for(int i = (m); i &lt; (n); i++)
+#define pb push_back
+#define mp make_pair
+#define fst first
+#define snd second
+#define ins insert
+#define all(v) sort(v.begin(),v.end())
+#define sz(v) int(v.size())
+const int MOD=1e9+7;
+const int mod= 998244353;
+typedef long long ll;
+typedef vector&lt;int&gt; vi; 
+typedef vector&lt;pair&lt;int,int&gt;&gt; vii; 
+typedef vector&lt;ll&gt; vll; 
+typedef pair&lt;ll,ll&gt; ii;
+#define yes cout&lt;&lt;&quot;YES&quot;&lt;&lt;endl
+#define no cout&lt;&lt;&quot;NO&quot;&lt;&lt;endl
+const double PI = acos(-1);
+ 
+int main() {
+ 
+int t;cin&gt;&gt;t;
+while(t--){
+	int n;cin&gt;&gt;n;
+	if(n%2==0){
+		f(i,0,n/2){
+		   cout&lt;&lt;'a';
+		}
+		cout&lt;&lt;'b';
+		f(i,n/2 + 1, n){
+		   cout&lt;&lt;'a';
+		}
+		cout&lt;&lt;endl;
+	}
+	else {
+		if(n==1){cout&lt;&lt;'a'&lt;&lt;endl; continue;}
+		f(i,0,(n-1)/2){
+			cout&lt;&lt;'a';
+		}
+		cout&lt;&lt;'b'&lt;&lt;'c';
+		f(i,(n+3)/2, n){
+			cout&lt;&lt;'a';
+		}
+		cout&lt;&lt;endl;
+	}
+}
+ return 0;
+}
+</div></code></code></pre>
+<hr>
+<ul>
+<li>And MORE ➜ <a href="https://hackmd.io/c/tutorials">HackMD Tutorials</a></li>
+<li>
+<ul>
+<li>LaTeX for formulas</li>
+</ul>
+</li>
+</ul>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo><mfrac><mrow><mo>−</mo><mi>b</mi><mo>±</mo><msqrt><mrow><msup><mi>b</mi><mn>2</mn></msup><mo>−</mo><mn>4</mn><mi>a</mi><mi>c</mi></mrow></msqrt></mrow><mrow><mn>2</mn><mi>a</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">
+x = {-b \pm \sqrt{b^2-4ac} \over 2a}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.276389em;vertical-align:-0.686em;"></span><span class="mord"><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.590389em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span><span class="mord mathdefault">a</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">−</span><span class="mord mathdefault">b</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">±</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.913389em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord" style="padding-left:0.833em;"><span class="mord"><span class="mord mathdefault">b</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.740108em;"><span style="top:-2.9890000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">4</span><span class="mord mathdefault">a</span><span class="mord mathdefault">c</span></span></span><span style="top:-2.873389em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg width='400em' height='1.08em' viewBox='0 0 400000 1080' preserveAspectRatio='xMinYMin slice'><path d='M95,702
+c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,-10,-9.5,-14
+c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54
+c44.2,-33.3,65.8,-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10
+s173,378,173,378c0.7,0,35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429
+c69,-144,104.5,-217.7,106.5,-221
+l0 -0
+c5.3,-9.3,12,-14,20,-14
+H400000v40H845.2724
+s-225.272,467,-225.272,467s-235,486,-235,486c-2.7,4.7,-9,7,-19,7
+c-6,0,-10,-1,-12,-3s-194,-422,-194,-422s-65,47,-65,47z
+M834 80h400000v40h-400000z'/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.12661100000000003em;"><span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></span></p>
+</math>
+
+</body>
+</html>
