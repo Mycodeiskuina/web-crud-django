@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-4 shadow-lg p-3 mb-5 bg-body rounded">
+    <!-- boton para agregar tarea -->
+    <button class="btn btn-primary" 
+        data-bs-toggle="modal" 
+        data-bs-target="#modalInsertTask"
+        v-on:click="resetForm"
+        @click="insertTask()">
+        Add Task
+    </button>
+    <table id="table" class="table mt-2 table-striped table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th>Course</th>
+                <th>Description</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Status</th>
+                <th>Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+            <tr>
+                <td>{{ task.course }}</td>
+                <td>{{ task.description }}</td>
+                <td>{{ task.date }}</td>
+                <td>{{ task.time }}</td>
+                {% if task.done == True %}
+                    <td>Done</td>
+                {%else %}
+                    <td>Pending</td>
+                {%endif %}
+                <td>
+                    <a href="{% url 'tasklist:delete' task.id %}" class="btn btn-danger">Delete</a>
+                    <a href="#modalUpdateTask-{{forloop.counter}}" class="btn btn-warning" data-bs-toggle="modal">Update</a>
+                </td>
+            </tr>
+            {% endfor %}
+            
+        </tbody>
+    
+    </table>
+    
+</div>
+
+<!-- Modal Insert -->
+
+<div class="modal fade" id="modalInsertTask" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Task</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{% url 'tasklist:insert' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="course" class="form-label">Course</label>
+                        <select class="form-select" aria-label="Default select example" name="course" v-model="course">
+                            <option selected>Compiladores</option>
+                            <option value="Análisis y Diseño de Algoritmos">Análisis y Diseño de Algoritmos</option>
+                            <option value="Ingeniería de Software">Ingeniería de Software</option>
+                            <option value="Base de datos II">Base de datos II</option>
+                            <option value="Perú: Temas de la Sociedad Contemporánea">Perú: Temas de la Sociedad Contemporánea</option>
+                            <option value="Proyecto Interdisciplinario III">Proyecto Interdisciplinario III</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="description" class="form-label">Description</label>
+                        <textarea class="form-control" id="description" rows="3" name="description" v-model="description"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="date" class="form-label">Date</label>
+                        <input type="datetime-local" class="form-control" id="date" name="date" v-model="date">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Insert</button>
+                    </div> 
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Update -->
+
+{% for task in tasks %}
+    <div class="modal fade" id="modalUpdateTask-{{forloop.counter}}" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Update Task</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{% url 'tasklist:update' task.id %}" method="POST">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="course" class="form-label">Course</label>
+                            <input class="form-control" id ="course" name='course' size=32 value = "{{task.course}}" disabled></input>
+                        </div>
+                        <div>
+                            <label for="description" class="form-label">Description</label>
+                            <textarea class="form-control" id="description" rows="3" name='description'>{{task.description}}</textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="date" class="form-label">Date</label>
+                            <input type="datetime-local" class="form-control" id="date" name="date"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="time" class="form-label">Time</label>
+                            <select class="form-select" aria-label="Default select example" name="status" v-model="status">
+                                <option selected>Pending</option>
+                                <option value="Done">Done</option>
+                            </select>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </div> 
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+
+{% endblock %}
+
+{% block scripts %}
+
+
+{% endblock scripts %}
